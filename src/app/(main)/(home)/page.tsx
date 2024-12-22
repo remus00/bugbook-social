@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { logout } from './(auth)/sign-out.action';
+import { logout } from '../../(auth)/sign-out.action';
 
 export default function Home() {
     return (

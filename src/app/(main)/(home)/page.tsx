@@ -1,5 +1,21 @@
-'use client';
+import { PostEditor } from '@/components/posts/editor/post-editor';
+import { Post } from '@/components/posts/post';
+import prisma from '@/lib/prisma';
+import { postDataInclude } from '@/lib/type';
 
-export default function Home() {
-    return <div className="flex h-screen w-full items-center justify-center">Home</div>;
+export default async function Home() {
+    const posts = await prisma.post.findMany({
+        include: postDataInclude,
+        orderBy: { createdAt: 'desc' },
+    });
+    return (
+        <div className="w-full min-w-0">
+            <div className="w-full min-w-0 space-y-5">
+                <PostEditor />
+                {posts.map((post) => (
+                    <Post key={post.id} post={post} />
+                ))}
+            </div>
+        </div>
+    );
 }

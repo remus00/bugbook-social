@@ -3,14 +3,26 @@
 import { logout } from '@/app/(auth)/sign-out.action';
 import { cn } from '@/lib/utils';
 import { useSession } from '@/providers/session-provider';
-import { LogOutIcon, UserIcon } from 'lucide-react';
+import {
+    CheckIcon,
+    LogOutIcon,
+    Monitor,
+    MoonIcon,
+    SunIcon,
+    UserIcon,
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
+    DropdownMenuPortal,
     DropdownMenuSeparator,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { UserAvatar } from './user-avatar';
@@ -21,6 +33,8 @@ interface Props {
 
 export const UserButton = ({ className }: Props) => {
     const { user, session } = useSession();
+
+    const { theme, setTheme } = useTheme();
 
     return (
         <DropdownMenu>
@@ -38,6 +52,46 @@ export const UserButton = ({ className }: Props) => {
                         Profile
                     </DropdownMenuItem>
                 </Link>
+                <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>
+                        <Monitor className="mr-2 size-4" />
+                        Theme
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                        <DropdownMenuSubContent className="w-[200px]">
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => setTheme('system')}
+                            >
+                                <Monitor className="mr-2 size-4" />
+                                System default{' '}
+                                {theme === 'system' && (
+                                    <CheckIcon className="ms-auto size-4" />
+                                )}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => setTheme('light')}
+                            >
+                                <SunIcon className="mr-2 size-4" />
+                                Light{' '}
+                                {theme === 'light' && (
+                                    <CheckIcon className="ms-auto size-4" />
+                                )}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => setTheme('dark')}
+                            >
+                                <MoonIcon className="mr-2 size-4" />
+                                Dark{' '}
+                                {theme === 'dark' && (
+                                    <CheckIcon className="ms-auto size-4" />
+                                )}
+                            </DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                </DropdownMenuSub>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     onClick={async () => logout()}

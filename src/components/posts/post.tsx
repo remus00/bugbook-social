@@ -1,4 +1,5 @@
 import { PostData } from '@/lib/type';
+import { formatRelativeDate } from '@/lib/utils';
 import Link from 'next/link';
 import { UserAvatar } from '../custom/user-avatar';
 
@@ -24,7 +25,7 @@ export const Post = ({ post }: Props) => {
                         href={`/posts/${post.id}`}
                         className="block text-sm text-muted-foreground hover:underline"
                     >
-                        {/* {formatRelativeDate(post.createdAt)} */}
+                        {formatRelativeDate(post.createdAt)}
                     </Link>
                 </div>
             </div>

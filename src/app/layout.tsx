@@ -1,4 +1,5 @@
 import { Toaster } from '@/components/ui/toaster';
+import { ReactQueryProvider } from '@/providers/react-query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -30,15 +31,17 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <Toaster />
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    {children}
-                </ThemeProvider>
+                <ReactQueryProvider>
+                    <Toaster />
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        {children}
+                    </ThemeProvider>
+                </ReactQueryProvider>
             </body>
         </html>
     );

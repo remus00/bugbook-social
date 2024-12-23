@@ -3,6 +3,7 @@
 import { logout } from '@/app/(auth)/sign-out.action';
 import { cn } from '@/lib/utils';
 import { useSession } from '@/providers/session-provider';
+import { useQueryClient } from '@tanstack/react-query';
 import {
     CheckIcon,
     LogOutIcon,
@@ -32,9 +33,11 @@ interface Props {
 }
 
 export const UserButton = ({ className }: Props) => {
-    const { user, session } = useSession();
+    const { user } = useSession();
 
     const { theme, setTheme } = useTheme();
+
+    const queryClient = useQueryClient();
 
     return (
         <DropdownMenu>
@@ -94,7 +97,10 @@ export const UserButton = ({ className }: Props) => {
                 </DropdownMenuSub>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                    onClick={async () => logout()}
+                    onClick={async () => {
+                        queryClient.clear();
+                        logout();
+                    }}
                     className="cursor-pointer"
                 >
                     <LogOutIcon className="mr-2 size-4" />

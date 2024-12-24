@@ -4,6 +4,7 @@ import { formatDate } from 'date-fns';
 import { Button } from '../ui/button';
 import { FollowButton } from './follow-button';
 import { FollowersCount } from './followers-count';
+import { Linkify } from './linkify';
 import { UserAvatar } from './user-avatar';
 
 interface Props {
@@ -53,9 +54,11 @@ export const UserProfile = ({ user, loggedInUserId }: Props) => {
             {user.bio && (
                 <>
                     <hr />
-                    <div className="overflow-hidden whitespace-pre-line break-words">
-                        {user.bio}
-                    </div>
+                    <Linkify>
+                        <div className="overflow-hidden whitespace-pre-line break-words">
+                            {user.bio}
+                        </div>
+                    </Linkify>
                 </>
             )}
         </div>

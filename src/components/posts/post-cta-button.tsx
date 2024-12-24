@@ -22,7 +22,7 @@ export const PostCTAButton = ({ post, className }: Props) => {
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger asChild>
                     <Button size="icon" variant="ghost" className={cn(className)}>
                         <MoreHorizontalIcon className="size-5 text-muted-foreground" />
                     </Button>

@@ -49,7 +49,7 @@ export const UserButton = ({ className }: Props) => {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Logged in as @{user.username}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <Link href={`/users/${user.username}`}>
+                <Link href={`/user/${user.username}`}>
                     <DropdownMenuItem className="cursor-pointer">
                         <UserIcon className="mr-2 size-4" />
                         Profile

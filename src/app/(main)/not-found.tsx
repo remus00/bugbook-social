@@ -1,0 +1,10 @@
+export default function NotFound() {
+    return (
+        <div className="my-12 w-full space-y-3 text-center">
+            <h1 className="text-3xl font-bold">Not found</h1>
+            <p className="text-destructive">
+                The page you are looking for does not exist.
+            </p>
+        </div>
+    );
+}
